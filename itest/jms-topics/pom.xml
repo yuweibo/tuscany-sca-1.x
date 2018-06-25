@@ -28,12 +28,7 @@
     <artifactId>itest-jms-topics</artifactId>
     <name>Apache Tuscany SCA JMS Tests for topics</name>
 
-    <repositories>
-       <repository>
-          <id>apache.incubator</id>
-          <url>http://people.apache.org/repo/m2-incubating-repository</url>
-       </repository>
-    </repositories>
+
 
     <dependencies>
         

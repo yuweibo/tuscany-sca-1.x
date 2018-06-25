@@ -29,15 +29,6 @@
     <artifactId>tuscany-binding-ws-axis2</artifactId>
     <name>Apache Tuscany SCA Axis2-based WS Binding Extension</name>
 
-    <repositories>
-        <repository>
-            <id>apache.ws</id>
-            <name>Apache WebServices Repository</name>
-            <url>http://ws.zones.apache.org/repository/</url>
-            <layout>legacy</layout>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.tuscany.sca</groupId>
@@ -210,7 +201,7 @@
         <dependency>
             <groupId>org.apache.ws.security</groupId>
             <artifactId>wss4j</artifactId>
-            <version>1.5.4</version>
+            <version>1.6.19</version>
         </dependency>
         
         <dependency>
@@ -229,7 +220,7 @@
         <dependency>
             <groupId>org.apache.rampart</groupId>
             <artifactId>rampart-core</artifactId>
-            <version>1.4</version>
+            <version>1.7.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.ant</groupId>

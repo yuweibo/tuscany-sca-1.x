@@ -29,12 +29,6 @@
     <packaging>jar</packaging>
     <name>Apache Tuscany SCA Demo BigBank Account</name>
 
-    <repositories>
-        <repository>
-            <id>apache.incubator</id>
-            <url>http://people.apache.org/repo/m2-incubating-repository</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>

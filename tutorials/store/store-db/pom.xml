@@ -28,12 +28,7 @@
     <artifactId>tutorial-store-db</artifactId>
     <name>Apache Tuscany SCA Store Tutorial Online Store Using DB</name>
 
-    <repositories>
-       <repository>
-          <id>apache.incubator</id>
-          <url>http://people.apache.org/repo/m2-incubating-repository</url>
-       </repository>
-    </repositories>
+
 
     <dependencies>
         <dependency>

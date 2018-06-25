@@ -808,11 +808,11 @@ public class Axis2ServiceProvider {
             for ( int count1 = 0 ; count1 < recvResults.size() ; ++count1 ) {
                 if ( recvResults.elementAt(count1) instanceof WSHandlerResult ) {
                     WSHandlerResult wshr = (WSHandlerResult)recvResults.elementAt(count1);
-                    Vector results = wshr.getResults();
+                    List results = wshr.getResults();
                     for ( int count2 = 0 ; count2 < results.size() ; ++count2 ) {
-                        if ( results.elementAt(count2) instanceof WSSecurityEngineResult ) {
+                        if ( results.get(count2) instanceof WSSecurityEngineResult ) {
                             WSSecurityEngineResult securityResult = 
-                                (WSSecurityEngineResult)wshr.getResults().elementAt(count2);
+                                (WSSecurityEngineResult)wshr.getResults().get(count2);
                             if ( securityResult.get("principal") != null ) {
                                 message.getHeaders().add(securityResult.get("principal"));
                             }

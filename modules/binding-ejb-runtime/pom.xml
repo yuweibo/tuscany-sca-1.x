@@ -32,6 +32,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.apache.openejb</groupId>
+            <artifactId>openejb-core</artifactId>
+            <version>4.7.5</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.tuscany.sca</groupId>
             <artifactId>tuscany-binding-ejb</artifactId>
             <version>1.4.1-SNAPSHOT</version>
@@ -158,20 +163,6 @@
 
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>geronimo-repository</id>
-            <name>Geronimo Repository</name>
-            <url>http://svn.apache.org/repos/asf/geronimo/server/tags/2.0.2/repository</url>
-            <layout>default</layout>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-    </repositories>
 
     <build>
         <plugins>

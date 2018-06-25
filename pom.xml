@@ -51,125 +51,6 @@
         <url>http://issues.apache.org/jira/browse/TUSCANY</url>
     </issueManagement>
 
-    <repositories>
-       <repository>
-          <id>apache.incubator</id>
-          <url>http://people.apache.org/repo/m2-incubating-repository</url>
-           <releases>
-               <enabled>true</enabled>
-           </releases>
-           <snapshots>
-               <enabled>false</enabled>
-           </snapshots>
-       </repository>
-       <!-- Apache SNAPSHOT repository for unreleased artifacts -->
-       <repository>
-            <id>apache.snapshots</id>
-            <name>Apache SNAPSHOT Repository</name>
-            <url>http://people.apache.org/repo/m2-snapshot-repository</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>apache.ws.zone</id>
-            <name>Apache WS Zone Repository</name>
-            <url>http://ws.zones.apache.org/repository2</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>indiana</id>
-            <url>http://ftp.ussg.iu.edu/eclipse/modeling/emf/emf/maven2/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>osuosl.org</id>
-            <url>http://ftp.osuosl.org/pub/eclipse/tools/emf/maven2</url>
-           <releases>
-               <enabled>true</enabled>
-           </releases>
-           <snapshots>
-               <enabled>false</enabled>
-           </snapshots>
-        </repository>        
-    </repositories>
-
-    <pluginRepositories>
-        <!-- Apache repository for artifacts released by Apache TLP projects -->
-        <pluginRepository>
-            <id>apache</id>
-            <name>Apache Repository</name>
-            <url>http://people.apache.org/repo/m2-ibiblio-rsync-repository</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-
-        <!-- Apache Incubator repository for artifacts released by Incubator projects -->
-        <pluginRepository>
-            <id>apache.incubator</id>
-            <name>Apache Incubator Repository</name>
-            <url>http://people.apache.org/repo/m2-incubating-repository</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-
-        <!-- Apache SNAPSHOT repository for unreleased artifacts -->
-        <pluginRepository>
-            <id>apache.snapshots</id>
-            <name>Apache SNAPSHOT Repository</name>
-            <url>http://people.apache.org/repo/m2-snapshot-repository</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-
-        <!-- Codehaus SNAPSHOT repository -->
-        <pluginRepository>
-            <id>codehaus-snapshot</id>
-            <name>Codehaus Snapshot Repository</name>
-            <url>http://snapshots.repository.codehaus.org</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <distributionManagement>
-        <repository>
-            <id>apache.releases</id>
-            <name>Apache Release Distribution Repository</name>
-            <url>scp://people.apache.org/www/people.apache.org/repo/m2-ibiblio-rsync-repository</url>
-        </repository>
-        <snapshotRepository>
-            <id>apache.snapshots</id>
-            <name>Apache Development Snapshot Repository</name>
-            <url>scp://people.apache.org/www/people.apache.org/repo/m2-snapshot-repository</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <profiles>
         <profile>
@@ -179,12 +60,15 @@
             </activation>
             <modules>
                 <module>modules</module>
-                <module>tools</module>
-                <module>samples</module>
-                <module>itest</module>
-                <module>vtest</module>
-                <module>tutorials</module>
+                <!--<module>tools</module>-->
+                <!--<module>samples</module>-->
+                <!--<module>itest</module>-->
+                <!--<module>vtest</module>-->
+                <!--<module>tutorials</module>-->
             </modules>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
         </profile>
 
         <profile>

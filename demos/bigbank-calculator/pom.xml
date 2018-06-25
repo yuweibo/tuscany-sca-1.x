@@ -28,12 +28,7 @@
     <artifactId>demo-bigbank-calculator</artifactId>
     <name>Apache Tuscany SCA Demo BigBank Calculator</name>
 
-    <repositories>
-       <repository>
-          <id>apache.incubator</id>
-          <url>http://people.apache.org/repo/m2-incubating-repository</url>
-       </repository>
-    </repositories>
+
 
     <dependencies>
         <dependency>

@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.apache.tuscany.sca</groupId>
             <artifactId>tuscany-databinding-jaxb</artifactId>
-            <version>${project.version}</version>
+            <version>1.4</version>
             <scope>compile</scope>
         </dependency>
         
@@ -69,7 +69,7 @@
         <dependency>
             <groupId>org.apache.tuscany.sca</groupId>
             <artifactId>tuscany-interface-java-jaxws</artifactId>
-            <version>${project.version}</version>
+            <version>1.4</version>
             <scope>compile</scope>
         </dependency>
                 

@@ -28,12 +28,6 @@
     <artifactId>sample-calculator-corba-service</artifactId>
     <name>Apache Tuscany SCA Sample Calculator CORBA Service</name>
 
-    <repositories>
-       <repository>
-          <id>apache.incubator</id>
-          <url>http://people.apache.org/repo/m2-incubating-repository</url>
-       </repository>
-    </repositories>
 
     <dependencies>
         <dependency>

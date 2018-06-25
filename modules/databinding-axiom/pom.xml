@@ -27,6 +27,20 @@
     </parent>
     <artifactId>tuscany-databinding-axiom</artifactId>
     <name>Apache Tuscany SCA Data Binding for Axiom</name>
+    <repositories>
+        <repository>
+            <id>Nexus</id>
+            <name>Nexus Public Repository</name>
+            <url>http://192.168.0.102:8081/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>Nexus</id>
+            <name>Nexus Public Repository</name>
+            <url>http://192.168.0.102:8081/nexus/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencies>
         <dependency>

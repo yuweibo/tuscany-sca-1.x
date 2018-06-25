@@ -30,9 +30,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.eclipse.jdt.debug</groupId>
-            <artifactId>ui</artifactId>
-            <version>3.2.100-v20070531-1800</version>
+                <groupId>org.eclipse.jdt.debug</groupId>
+                <artifactId>ui</artifactId>
+                <version>3.2.100-v20070531-1800</version>
             <!--
                 Exclude org.eclipse.equinox:app to avoid maven bug/bad equinox version scheme. i.e.:
 

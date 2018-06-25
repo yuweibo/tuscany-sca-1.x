@@ -288,7 +288,7 @@
 		<dependency>
 			<groupId>org.apache.openjpa</groupId>
 			<artifactId>openjpa-all</artifactId>
-			<version>0.9.7-incubating</version>
+			<version>3.0.0</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.apache.openjpa</groupId>

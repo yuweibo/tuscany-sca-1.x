@@ -92,8 +92,8 @@
                 <module>data-api</module>
                 <module>databinding</module>
                 <module>databinding-axiom</module>
-                <module>databinding-jaxb</module>
-                <module>databinding-jaxb-axiom</module>
+                <!--<module>databinding-jaxb</module>-->
+                <!--<module>databinding-jaxb-axiom</module>-->
                 <module>databinding-sdo</module>
                 <module>databinding-sdo-axiom</module>
                 <module>databinding-json</module>
@@ -125,7 +125,7 @@
                 <module>host-tomcat</module>
                 <module>interface</module>
                 <module>interface-java</module>
-                <module>interface-java-jaxws</module>
+                <!--<module>interface-java-jaxws</module>-->
                 <module>interface-java-xml</module>
                 <module>interface-wsdl</module>
                 <module>interface-wsdl-xml</module>

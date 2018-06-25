@@ -30,6 +30,21 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.esotericsoftware</groupId>
+            <artifactId>kryo</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.tuscany.sca</groupId>
             <artifactId>tuscany-core-spi</artifactId>
             <version>1.4.1-SNAPSHOT</version>
@@ -138,6 +153,14 @@
                         <Bundle-Description>${pom.name}</Bundle-Description>
                         <Export-Package>org.apache.tuscany.sca.databinding.json*</Export-Package>
                     </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
         </plugins>

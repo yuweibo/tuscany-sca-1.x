@@ -6,32 +6,20 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
  * KIND, either express or implied.  See the License for the
  * specific language governing permissions and limitations
- * under the License.    
+ * under the License.
  */
 package org.apache.tuscany.sca.binding.jsonrpc.provider;
 
-import java.io.BufferedReader;
-import java.io.CharArrayWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.metaparadigm.jsonrpc.JSONRPCBridge;
+import com.metaparadigm.jsonrpc.JSONRPCServlet;
 import org.apache.tuscany.sca.assembly.Binding;
 import org.apache.tuscany.sca.interfacedef.InterfaceContract;
 import org.apache.tuscany.sca.interfacedef.Operation;
@@ -41,13 +29,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osoa.sca.ServiceRuntimeException;
 
-import com.metaparadigm.jsonrpc.JSONRPCBridge;
-import com.metaparadigm.jsonrpc.JSONRPCResult;
-import com.metaparadigm.jsonrpc.JSONRPCServlet;
+import javax.servlet.ServletConfig;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+
+import static org.apache.tuscany.sca.databinding.json.client.JSONRPCConstants.*;
 
 /**
  * Servlet that handles JSON-RPC requests invoking SCA services.
- * 
+ *
  * There is an instance of this Servlet for each <binding.jsonrpc>
  *
  * @version $Rev$ $Date$
@@ -140,7 +134,7 @@ public class JSONRPCServiceServlet extends JSONRPCServlet {
             throw new RuntimeException("Unable to parse request", e);
         }
 
-        
+
         // check if it's a system request 
         // or a method invocation
         byte[] bout;
@@ -171,11 +165,11 @@ public class JSONRPCServiceServlet extends JSONRPCServlet {
         out.flush();
         out.close();
     }
-    
+
     protected byte[] handleJSONRPCSystemInvocation(HttpServletRequest request, HttpServletResponse response, String requestData) throws IOException,
     UnsupportedEncodingException {
         /*
-         * Create a new bridge for every request to avoid all the problems with 
+         * Create a new bridge for every request to avoid all the problems with
          * JSON-RPC-Java storing the bridge in the session
          */
         HttpSession session = request.getSession();
@@ -183,7 +177,7 @@ public class JSONRPCServiceServlet extends JSONRPCServlet {
         JSONRPCBridge jsonrpcBridge = new JSONRPCBridge();
         jsonrpcBridge.registerObject("Service", serviceInstance, serviceInterface);
         session.setAttribute("JSONRPCBridge", jsonrpcBridge);
-        
+
         org.json.JSONObject jsonReq = null;
         com.metaparadigm.jsonrpc.JSONRPCResult jsonResp = null;
         try {
@@ -202,7 +196,7 @@ public class JSONRPCServiceServlet extends JSONRPCServlet {
 
         return jsonResp.toString().getBytes("UTF-8");
     }
-    
+
     protected byte[] handleJSONRPCMethodInvocation(HttpServletRequest request, HttpServletResponse response, JSONObject jsonReq) throws IOException,
     UnsupportedEncodingException {
 
@@ -215,7 +209,7 @@ public class JSONRPCServiceServlet extends JSONRPCServlet {
             if ((method != null) && (method.indexOf('.') < 0)) {
                 jsonReq.putOpt("method", "Service" + "." + method);
             }
-            
+
             // Extract the arguments
             JSONArray array = jsonReq.getJSONArray("params");
             args = new Object[array.length()];
@@ -232,7 +226,7 @@ public class JSONRPCServiceServlet extends JSONRPCServlet {
         RuntimeWire wire = componentService.getRuntimeWire(binding, serviceContract);
         Operation jsonOperation = findOperation(method);
         Object result = null;
-      
+
         try {
         	JSONObject jsonResponse = new JSONObject();
         	result = wire.invoke(jsonOperation, args);
@@ -246,13 +240,21 @@ public class JSONRPCServiceServlet extends JSONRPCServlet {
                 throw new ServiceRuntimeException("Unable to create JSON response", e);
             }
         } catch (InvocationTargetException e) {
-           	 JSONRPCResult errorResult = new JSONRPCResult(JSONRPCResult.CODE_REMOTE_EXCEPTION, id, e.getCause() );
-             return errorResult.toString().getBytes("UTF-8");
-        } catch(RuntimeException e) {
-             JSONRPCResult errorResult = new JSONRPCResult(JSONRPCResult.CODE_REMOTE_EXCEPTION, id, e.getCause());
-             return errorResult.toString().getBytes("UTF-8");
+            return handleException(id, e.getCause(), RPC_RESPONSE_EXCEPTION);
+        } catch (RuntimeException e) {
+            return handleException(id, e.getCause(), RPC_RESPONSE_SYS_EXCEPTION);
         }
-   }
+    }
+
+    private byte[] handleException(Object id, Throwable cause, String exceptionType) throws UnsupportedEncodingException {
+        JSONObject errorResult = new JSONObject();
+        errorResult.put(RPC_BODY_ID, id);
+        JSONObject exception = new JSONObject();
+        exception.put(RPC_PARAM_CLASSNAME, cause.getClass().getName());
+        exception.put(RPC_PARAM_KRYO_VAL, com.alibaba.fastjson.JSONObject.toJSONString(cause));
+        errorResult.put(exceptionType, exception);
+        return errorResult.toString().getBytes("UTF-8");
+    }
 
     /**
      * Find the operation from the component service contract
@@ -264,11 +266,11 @@ public class JSONRPCServiceServlet extends JSONRPCServlet {
         if (method.contains(".")) {
             method = method.substring(method.lastIndexOf(".") + 1);
         }
-    
+
         List<Operation> operations = serviceContract.getInterface().getOperations();
             //componentService.getBindingProvider(binding).getBindingInterfaceContract().getInterface().getOperations();
 
-        
+
         Operation result = null;
         for (Operation o : operations) {
             if (o.getName().equalsIgnoreCase(method)) {
